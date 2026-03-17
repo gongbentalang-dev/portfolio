@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="UTF-8">
+<title>Photography | Takuro Miyamoto</title>
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<header>
+<nav>
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="photography.html" class="active">Photography</a>
+<a href="contact.html">Contact</a>
+</nav>
+</header>
+
+<section class="gallery">
+<img src="images/photo1.jpg" class="=gallery-img">
+<img src="images/photo2.jpg" class="=gallery-img">
+<img src="images/photo3.jpg" class="=gallery-img">
+<img src="images/photo4.jpg" class="=gallery-img">
+<img src="images/photo5.jpg" class="=gallery-img">
+<img src="images/photo6.jpg" class="=gallery-img">
+<img src="images/photo7.jpg" class="=gallery-img">
+<img src="images/photo8.jpg" class="=gallery-img">
+<img src="images/photo9.jpg" class="=gallery-img">
+<img src="images/photo10.jpg" class="=gallery-img">
+<img src="images/photo11.jpg" class="=gallery-img">
+<img src="images/photo12.jpg" class="=gallery-img">
+</section>
+
+<!-- EXIF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.min.js"></script>
+
+<!-- ライトボックス -->
+<div id="lightbox">
+
+<span id="close">×</span>
+
+<img id="lightbox-img">
+
+<div class="arrow left">‹</div>
+<div class="arrow right">›</div>
+
+<div class="photo-info">
+<p id="camera"></p>
+<p id="settings"></p>
+</div>
+
+</div> <!-- ← これ重要 -->
+
+<script src="js/lightbox.js"></script>
+
+</body>
+</html>
