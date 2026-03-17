@@ -94,3 +94,4 @@ function formatShutter(speed){
   return speed;
 }
 
+
