@@ -1,16 +1,9 @@
-// gallery 内の画像をすべて取得
 const images = document.querySelectorAll(".gallery img");
-
-// lightbox要素
 const lightbox = document.getElementById("lightbox");
 const lightboxImg = document.getElementById("lightbox-img");
-
-// ボタン
 const closeBtn = document.getElementById("close");
 const prev = document.querySelector(".left");
 const next = document.querySelector(".right");
-
-// EXIF表示要素
 const cameraEl = document.getElementById("camera");
 const settingsEl = document.getElementById("settings");
 
@@ -20,20 +13,9 @@ let current = 0;
 images.forEach((img, index) => {
   img.addEventListener("click", () => {
     lightbox.classList.add("active");
-    lightboxImg.src = img.src;
     current = index;
-
-    // EXIF取得
-    EXIF.getData(img, function() {
-      const make = EXIF.getTag(this, "Make");
-      const model = EXIF.getTag(this, "Model");
-      const f = EXIF.getTag(this, "FNumber");
-      const shutter = EXIF.getTag(this, "ExposureTime");
-      const iso = EXIF.getTag(this, "ISOSpeedRatings");
-
-      cameraEl.textContent = `${make || ""} ${model || ""}`;
-      settingsEl.textContent = `f/${f || "-"}  ${formatShutter(shutter)}s  ISO${iso || "-"}`;
-    });
+    // クリック時も関数を呼び出すように統一！
+    updateLightbox(img);
   });
 });
 
@@ -50,16 +32,14 @@ lightbox.addEventListener("click", (e) => {
 // 次へ
 next.addEventListener("click", (e) => {
   e.stopPropagation();
-  current++;
-  if(current >= images.length) current = 0;
+  current = (current + 1) % images.length;
   updateLightbox(images[current]);
 });
 
 // 前へ
 prev.addEventListener("click", (e) => {
   e.stopPropagation();
-  current--;
-  if(current < 0) current = images.length - 1;
+  current = (current - 1 + images.length) % images.length;
   updateLightbox(images[current]);
 });
 
@@ -71,30 +51,38 @@ document.addEventListener("keydown", (e) => {
   if(e.key === "Escape") lightbox.classList.remove("active");
 });
 
-// --- 関数で更新 ---
+// --- 表示を更新する関数（手入力優先＋自動取得） ---
 function updateLightbox(img) {
   lightboxImg.src = img.src;
 
-  // ★ 情報を一度クリアする（これがないと、前の写真のデータが残る場合があります）
-  cameraEl.textContent = "Loading...";
-  settingsEl.textContent = "";
+  const manualCamera = img.getAttribute("data-camera");
+  const manualSettings = img.getAttribute("data-settings");
 
-  EXIF.getData(img, function() {
-    const make = EXIF.getTag(this, "Make");
-    const model = EXIF.getTag(this, "Model");
-    const f = EXIF.getTag(this, "FNumber");
-    const shutter = EXIF.getTag(this, "ExposureTime");
-    const iso = EXIF.getTag(this, "ISOSpeedRatings");
+  if (manualCamera) {
+    // 手入力があればそれを表示
+    cameraEl.textContent = manualCamera;
+    settingsEl.textContent = manualSettings || "";
+  } else {
+    // 手入力がない場合は自動取得
+    cameraEl.textContent = "Loading...";
+    settingsEl.textContent = "";
 
-    // データがあるときだけ表示、ないときは「No Data」にする
-    if (make || model) {
-      cameraEl.textContent = `${make || ""} ${model || ""}`;
-      settingsEl.textContent = `f/${f || "-"}  ${formatShutter(shutter)}s  ISO${iso || "-"}`;
-    } else {
-      cameraEl.textContent = "No EXIF data";
-      settingsEl.textContent = "";
-    }
-  });
+    EXIF.getData(img, function() {
+      const make = EXIF.getTag(this, "Make");
+      const model = EXIF.getTag(this, "Model");
+      const f = EXIF.getTag(this, "FNumber");
+      const shutter = EXIF.getTag(this, "ExposureTime");
+      const iso = EXIF.getTag(this, "ISOSpeedRatings");
+
+      if (make || model) {
+        cameraEl.textContent = `${make || ""} ${model || ""}`;
+        settingsEl.textContent = `f/${f || "-"}  ${formatShutter(shutter)}s  ISO${iso || "-"}`;
+      } else {
+        cameraEl.textContent = "No EXIF data";
+        settingsEl.textContent = "";
+      }
+    });
+  }
 }
 
 // シャッタースピードを 1/xxx 表記に変換
@@ -103,5 +91,3 @@ function formatShutter(speed){
   if(speed < 1) return `1/${Math.round(1/speed)}`;
   return speed;
 }
-
-
