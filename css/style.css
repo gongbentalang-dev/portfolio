@@ -113,6 +113,10 @@ margin-bottom:20px;
 
 @media (max-width:768px){
 
+    body{
+        padding-top: 100px;
+    }
+    
   .gallery{
     grid-template-columns:repeat(2,1fr);
     gap:8px;
@@ -209,7 +213,7 @@ body{
   background:black;
   color:white;
 }
-
+/*----nav----*/
 nav a{
   margin-left:20px;
   text-decoration:none;
