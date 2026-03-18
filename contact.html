@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Photography | Takuro Miyamoto</title>
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<header>
+<nav>
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="photography.html">Photography</a>
+<a href="contact.html" class="active">Contact</a>
+</nav>
+</header>
+
+ <main class="contact-section">
+        <h1 class="page-title">Contact</h1>
+        <p class="contact-desc">ご依頼やご質問は、以下のフォームよりお気軽にご連絡ください。</p>
+
+        
+        <form action="https://formspree.io/f/xjgajvbz" method="POST" class="contact-form">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required placeholder="お名前">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="_replyto" required placeholder="メールアドレス">
+            </div>
+
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="5" required placeholder="メッセージ内容"></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">SEND</button>
+        </form>
+    </main>
+</body>
+</html>

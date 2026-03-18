@@ -116,7 +116,7 @@ margin-bottom:20px;
     body{
         padding-top: 100px;
     }
-    
+
   .gallery{
     grid-template-columns:repeat(2,1fr);
     gap:8px;
@@ -259,4 +259,69 @@ border-bottom:1px solid white;
 #exif-info {
     font-family: 'Courier New', Courier, monospace; /* 設定値だけ等幅フォントに */
     opacity: 0.9;       /* 少しだけ薄くして優先順位を下げる */
+}
+
+/* Contactページのレイアウト */
+.contact-section {
+    max-width: 600px;
+    margin: 80px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.page-title {
+    font-size: 2rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+}
+
+.contact-desc {
+    margin-bottom: 40px;
+    color: #ffffff;
+    font-size: 0.9rem;
+}
+
+/* フォームのスタイル（ここをいじれば世界観を調整できます） */
+.contact-form {
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    color: #ffffff;
+}
+
+.form-group input, 
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc; /* 線の細さや色を変えると雰囲気が変わります */
+    border-radius: 0; /* 角を丸くしたくない場合は0 */
+    background: #fff;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+/* 送信ボタン（サイトのメインカラーに合わせましょう） */
+.submit-btn {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background: #000; /* 黒で引き締める */
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    letter-spacing: 0.2em;
+    transition: opacity 0.3s;
+}
+
+.submit-btn:hover {
+    opacity: 0.7;
 }
