@@ -75,6 +75,10 @@ document.addEventListener("keydown", (e) => {
 function updateLightbox(img) {
   lightboxImg.src = img.src;
 
+  // ★ 情報を一度クリアする（これがないと、前の写真のデータが残る場合があります）
+  cameraEl.textContent = "Loading...";
+  settingsEl.textContent = "";
+
   EXIF.getData(img, function() {
     const make = EXIF.getTag(this, "Make");
     const model = EXIF.getTag(this, "Model");
@@ -82,8 +86,14 @@ function updateLightbox(img) {
     const shutter = EXIF.getTag(this, "ExposureTime");
     const iso = EXIF.getTag(this, "ISOSpeedRatings");
 
-    cameraEl.textContent = `${make || ""} ${model || ""}`;
-    settingsEl.textContent = `f/${f || "-"}  ${formatShutter(shutter)}s  ISO${iso || "-"}`;
+    // データがあるときだけ表示、ないときは「No Data」にする
+    if (make || model) {
+      cameraEl.textContent = `${make || ""} ${model || ""}`;
+      settingsEl.textContent = `f/${f || "-"}  ${formatShutter(shutter)}s  ISO${iso || "-"}`;
+    } else {
+      cameraEl.textContent = "No EXIF data";
+      settingsEl.textContent = "";
+    }
   });
 }
 
