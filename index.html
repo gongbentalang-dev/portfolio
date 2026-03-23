@@ -1,40 +1,34 @@
 <!DOCTYPE html>
 <html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Takuro Miyamoto</title>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
 
-<head>
+  <body>
+    <header>
+      <nav>
+        <a href="index.html" class="active">Home</a>
+        <a href="about.html">About</a>
+        <a href="photography.html">Photography</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </header>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Takuro Miyamoto</title>
-<link rel="stylesheet" href="css/style.css">
+    <main>
+      <section class="slideshow">
+        <img id="slide1" class="slide active" src="images/photo1.jpg" alt="スライド画像 1">
+        <img id="slide2" class="slide" src="images/photo2.jpg" alt="スライド画像 2">
 
-</head>
+        <div class="hero-text">
+          <h1>Photography Portfolio</h1>
+          <p>Takuro Miyamoto</p>
+        </div>
+      </section>
+    </main>
 
-<body>
-
-<header>
-
-<nav>
-<a href="index.html" class="active">Home</a>
-<a href="about.html">About</a>
-<a href="photography.html">Photography</a>
-<a href="contact.html">Contact</a>
-</nav>
-
-</header>
-
-<section class="slideshow">
-
-<img id="slide1" class="slide active" src="images/photo1.jpg">
-<img id="slide2" class="slide" src="images/photo2.jpg">
-<div class="hero-text">
-<h2>Photography Portfolio</h2>
-<p>Takuro Miyamoto</p>
-</div>
-</section>
-
-<script src="js/slideshow.js"></script>
-
-</body>
-
+    <script src="js/slideshow.js"></script>
+  </body>
 </html>
