@@ -211,6 +211,11 @@ margin-bottom:20px;
 .left{ left:20px; }
 .right{ right:20px; }
 
+button {
+  all: unset;
+  cursor: pointer;
+}
+
 /* ===== 共通 ===== */
 
 body{

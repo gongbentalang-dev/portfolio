@@ -42,26 +42,23 @@
 <img src="images/photo18.jpg" loading="lazy" class="gallery-img">
 </section>
 
-<!-- EXIF -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.min.js"></script>
-
-<!-- ライトボックス -->
+<!-- Lightbox -->
 <div id="lightbox">
+  <button id="close" type="button" aria-label="閉じる">×</button>
 
-<span id="close">×</span>
+  <img id="lightbox-img" alt="拡大表示された画像">
 
-<img id="lightbox-img">
+  <button class="arrow left" type="button" aria-label="前の画像">‹</button>
+  <button class="arrow right" type="button" aria-label="次の画像">›</button>
 
-<div class="arrow left">‹</div>
-<div class="arrow right">›</div>
-
-<div class="photo-info">
-<p id="camera"></p>
-<p id="settings"></p>
+  <div class="photo-info">
+    <p id="camera"></p>
+    <p id="settings"></p>
+  </div>
 </div>
 
-</div> <!-- ← これ重要 -->
-
+<!-- EXIF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.min.js"></script>
 <script src="js/lightbox.js"></script>
 
 </body>
