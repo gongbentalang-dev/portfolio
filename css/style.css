@@ -1,339 +1,343 @@
-/* ヘッダー */
+/* ===== 共通 ===== */
 
-header{
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  padding:20px 30px;
-  display:flex;
-  align-items:center;
-  color:white;
-  z-index:10;
-
-  background:rgba(0,0,0,0.3);
-  backdrop-filter:blur(5px);
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: black;
+  color: white;
 }
 
-/* スライドショー */
+/* ===== ヘッダー / ナビ ===== */
 
-.slideshow{
-position:relative;
-width:100%;
-height:100vh;
-overflow:hidden;
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+
+  display: flex;
+  align-items: center;
+  padding: 20px 30px;
+
+  color: white;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
 }
 
-/* スライド画像 */
-
-.slide{
-position:absolute;
-width:100%;
-height:100%;
-
-object-fit:cover;
-
-opacity:0;
-transition:opacity 3s;
+nav {
+  margin-left: auto;
 }
 
-.slide.active{
-opacity:1;
+nav a {
+  margin-left: 20px;
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  transition: opacity 0.3s;
 }
 
-/* 中央テキスト */
-
-.hero-text{
-position:absolute;
-
-top:50%;
-left:50%;
-
-transform:translate(-50%,-50%);
-
-color:white;
-text-align:center;
+nav a:hover {
+  opacity: 0.7;
 }
 
-.hero-text h2{
-font-size:40px;
-margin:0;
+nav a.active {
+  border-bottom: 1px solid white;
 }
 
-.hero-text p{
-margin-top:10px;
-font-size:18px;
+/* ===== スライドショー ===== */
+
+.slideshow {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
 }
 
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 
-/*aboutページ*/
-.about{
-
-max-width:800px;
-margin:100px auto;
-padding:0 20px;
-
-color:white;
-line-height:1.8;
-
+  opacity: 0;
+  transition: opacity 3s;
 }
 
-.about h1{
-font-size:32px;
-margin-bottom:20px;
+.slide.active {
+  opacity: 1;
 }
 
-.about p{
-margin-bottom:20px;
-}
-/* ===== photography.html ===== */
+/* ===== ヒーローテキスト ===== */
 
-.gallery{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-  padding:80px 30px;
-  background:black;
-  min-height:100vh;
+.hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
 }
 
-.gallery img{
-  width:100%;
-  height:250px;
-  object-fit:cover;
-  cursor:pointer;
-  transition:transform 0.3s;
-  display:block;
+.hero-text h2 {
+  margin: 0;
+  font-size: 40px;
 }
 
-.gallery img:hover{
-  transform:scale(1.05);
+.hero-text p {
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+/* ===== Aboutページ ===== */
+
+.about {
+  max-width: 800px;
+  margin: 100px auto;
+  padding: 0 20px;
+
+  color: white;
+  line-height: 1.8;
+}
+
+.about h1 {
+  margin-bottom: 20px;
+  font-size: 32px;
+}
+
+.about p {
+  margin-bottom: 20px;
+}
+
+/* ===== Photographyページ ===== */
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+
+  min-height: 100vh;
+  padding: 80px 30px;
+  background: black;
+}
+
+.gallery img {
+  display: block;
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.gallery img:hover {
+  transform: scale(1.05);
+}
+
+/* ===== ライトボックス ===== */
+
+#lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+
+  display: none;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+}
+
+#lightbox.active {
+  display: flex;
+}
+
+#lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+}
+
+/* 閉じるボタン・矢印ボタン */
+
+#close,
+.arrow {
+  background: none;
+  border: none;
+  padding: 10px;
+
+  font: inherit;
+  color: white;
+  cursor: pointer;
+}
+
+#close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 30px;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 40px;
+}
+
+.left {
+  left: 20px;
+}
+
+.right {
+  right: 20px;
+}
+
+/* ===== EXIF表示 ===== */
+
+.photo-info {
+  position: absolute;
+  right: 40px;
+  bottom: 40px;
+  z-index: 1000;
+
+  padding: 12px 18px;
+  border-radius: 8px;
+
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 13px;
+  line-height: 1.6;
+  letter-spacing: 0.05em;
+}
+
+#camera {
+  margin-bottom: 4px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+#settings {
+  opacity: 0.9;
+  font-family: "Courier New", Courier, monospace;
+}
+
+/* ===== Contactページ ===== */
+
+.contact-section {
+  max-width: 600px;
+  margin: 80px auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.page-title {
+  margin-bottom: 10px;
+  font-size: 2rem;
+  letter-spacing: 0.1em;
+}
+
+.contact-desc {
+  margin-bottom: 40px;
+  color: #ffffff;
+  font-size: 0.9rem;
+}
+
+.contact-form {
+  text-align: left;
+}
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+
+  color: #ffffff;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.form-group input,
+.form-group textarea {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 12px;
+
+  border: 1px solid #ccc;
+  border-radius: 0;
+  background: #fff;
+  font-size: 1rem;
+}
+
+.submit-btn {
+  display: block;
+  width: 100%;
+  padding: 15px;
+
+  border: none;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+
+  letter-spacing: 0.2em;
+  transition: opacity 0.3s;
+}
+
+.submit-btn:hover {
+  opacity: 0.7;
 }
 
 /* ===== スマホ対応 ===== */
 
-@media (max-width:768px){
-
-    body{
-        padding-top: 90px;
-    }
-
-  .gallery{
-    grid-template-columns:repeat(2,1fr);
-    gap:6px;
-    padding:20px 10px;
+@media (max-width: 768px) {
+  body {
+    padding-top: 90px;
   }
 
-  .gallery img{
-    height:auto;
+  nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
   }
 
-  nav{
-    display:flex;
-    justify-content:space-around;
-    align-items:center;
+  nav a {
+    margin-left: 0;
+    padding: 12px 8px;
+    font-size: 18px;
   }
 
-  nav a{
-    font-size:18px;
-    padding:12px 8px;
-    margin-left:0; /* ← ここにまとめる */
+  .hero-text h2 {
+    font-size: 24px;
   }
 
-  .hero-text h2{
-    font-size:24px;
+  .hero-text p {
+    font-size: 14px;
   }
 
-  .hero-text p{
-    font-size:14px;
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+    padding: 20px 10px;
   }
 
-  .photo-info{
-    bottom:10px;
-    right:10px;
-    font-size:11px;
-    padding:8px 10px;
-  }
-  .gallery img{
-  width:100%;
-  height:30vw;
-  object-fit:cover;
-}
-}
-/* ===== ライトボックス ===== */
-
-#lightbox{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.8);
-  backdrop-filter:blur(5px);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  z-index:100;
-}
-
-#lightbox img{
-  max-width:90%;
-  max-height:90%;
-}
-
-#lightbox.active{
-  display:flex;
-}
-
-/* 閉じるボタン */
-
-#close{
-  position:absolute;
-  top:20px;
-  right:30px;
-  font-size:30px;
-  color:white;
-  cursor:pointer;
-}
-
-/* 矢印 */
-
-.arrow{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  font-size:40px;
-  color:white;
-  cursor:pointer;
-  padding:10px;
-}
-
-.left{ left:20px; }
-.right{ right:20px; }
-
-button {
-  all: unset;
-  cursor: pointer;
-}
-
-/* ===== 共通 ===== */
-
-body{
-  margin:0;
-  font-family:sans-serif;
-  background:black;
-  color:white;
-}
-/*----nav----*/
-nav a{
-  margin-left:20px;
-  text-decoration:none;
-  color:white;
-  font-size:14px;
-  transition:opacity 0.3s;
-}
-
-/* ナビを右詰め */
-
-nav{
-margin-left:auto;
-}
-nav a:hover{opacity:0.7;}
-nav a.active{
-border-bottom:1px solid white;
-}
-
-/* exifの表示　*/
-.photo-info {
-    position: absolute;
-    bottom: 40px;
-    right: 40px; 
-    left: auto;
-
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 12px 18px;
-    border-radius: 8px;
-
-    color: white;
-    font-size: 13px;
-    line-height: 1.6;
-    letter-spacing: 0.05em;
-    z-index: 1000;
-}
-#camera-info {
-    font-weight: bold;  /* カメラ名だけ太字に */
-    font-size: 15px;    /* カメラ名だけ少し大きく */
-    display: block;     /* 改行させる */
-    margin-bottom: 4px;
-}
-
-#exif-info {
-    font-family: 'Courier New', Courier, monospace; /* 設定値だけ等幅フォントに */
-    opacity: 0.9;       /* 少しだけ薄くして優先順位を下げる */
-}
-
-/* Contactページのレイアウト */
-.contact-section {
-    max-width: 600px;
-    margin: 80px auto;
-    padding: 0 20px;
-    text-align: center;
-}
-
-.page-title {
-    font-size: 2rem;
-    letter-spacing: 0.1em;
-    margin-bottom: 10px;
-}
-
-.contact-desc {
-    margin-bottom: 40px;
-    color: #ffffff;
-    font-size: 0.9rem;
-}
-
-/* フォームのスタイル（ここをいじれば世界観を調整できます） */
-.contact-form {
-    text-align: left;
-}
-
-.form-group {
-    margin-bottom: 25px;
-}
-
-.form-group label {
-    display: block;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-    color: #ffffff;
-}
-
-.form-group input, 
-.form-group textarea {
+  .gallery img {
     width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc; /* 線の細さや色を変えると雰囲気が変わります */
-    border-radius: 0; /* 角を丸くしたくない場合は0 */
-    background: #fff;
-    font-size: 1rem;
-    box-sizing: border-box;
-}
+    height: 30vw;
+    object-fit: cover;
+  }
 
-/* 送信ボタン（サイトのメインカラーに合わせましょう） */
-.submit-btn {
-    display: block;
-    width: 100%;
-    padding: 15px;
-    background: #000; /* 黒で引き締める */
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    letter-spacing: 0.2em;
-    transition: opacity 0.3s;
+  .photo-info {
+    right: 10px;
+    bottom: 10px;
+    padding: 8px 10px;
+    font-size: 11px;
+  }
 }
-
-.submit-btn:hover {
-    opacity: 0.7;
-}
-
