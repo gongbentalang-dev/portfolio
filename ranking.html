@@ -3,20 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Viewing Ranking</title>
-  <link rel="stylesheet" href="ranking.css" />
+  <title>Viewing History</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/ranking.css" />
 </head>
 <body>
-  <header class="ranking-header">
-    <h1>Most Viewed Top 5</h1>
-    <p>画像ごとの注視時間ランキング</p>
-    <a href="photography.html" class="back-link">← ギャラリーに戻る</a>
+  <header>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="photography.html">Photography</a>
+        <a href="ranking.html" class="active">Viewing History</a>
+        <a href="contact.html">Contact</a>
+    </nav>
   </header>
 
-  <main>
+  <main class="ranking-page">
+    <section class="ranking-header">
+      <h1>Your Top 5 Viewed Photos</h1>
+      <p>この端末での閲覧時間をもとに表示しています</p>
+    </section>
+
     <section id="ranking-list" class="ranking-list"></section>
   </main>
 
-  <script src="ranking.js"></script>
+  <script src="js/ranking.js"></script>
 </body>
 </html>
