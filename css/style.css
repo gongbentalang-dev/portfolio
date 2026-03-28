@@ -111,12 +111,10 @@ nav a.active {
 }
 
 /* ===== Photographyページ ===== */
-
 .gallery {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
-
   min-height: 100vh;
   padding: 80px 30px;
   background: black;
@@ -128,10 +126,15 @@ nav a.active {
   height: 250px;
   object-fit: cover;
   cursor: pointer;
-  transition: transform 0.3s;
+  transition: filter 0.3s ease, transform 0.3s ease;
 }
 
-.gallery img:hover {
+.gallery:hover img {
+  filter: grayscale(100%);
+}
+
+.gallery:hover img:hover {
+  filter: grayscale(0%);
   transform: scale(1.05);
 }
 
