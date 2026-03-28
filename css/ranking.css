@@ -1,0 +1,138 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #000;
+  color: #fff;
+}
+
+.ranking-header {
+  text-align: center;
+  padding: 60px 20px 30px;
+}
+
+.ranking-header h1 {
+  margin: 0 0 10px;
+  font-size: 2rem;
+}
+
+.ranking-header p {
+  margin: 0 0 20px;
+  color: #bbb;
+}
+
+.back-link {
+  color: #fff;
+  text-decoration: none;
+  border: 1px solid #666;
+  padding: 10px 18px;
+  display: inline-block;
+  transition: 0.3s;
+}
+
+.back-link:hover {
+  background: #fff;
+  color: #000;
+}
+
+.ranking-list {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 30px 20px 60px;
+}
+
+.ranking-card {
+  background: #111;
+  border: 1px solid #222;
+  padding: 12px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.ranking-card:hover {
+  transform: translateY(-5px);
+}
+
+.ranking-card img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+}
+
+.rank-label {
+  font-size: 0.9rem;
+  color: #aaa;
+  margin-bottom: 8px;
+}
+
+.time-label {
+  margin-top: 10px;
+  font-size: 0.95rem;
+  color: #ddd;
+}
+
+/* 順位ごとのサイズ差 */
+.rank-1 {
+  width: 320px;
+}
+
+.rank-1 img {
+  height: 420px;
+}
+
+.rank-2 {
+  width: 280px;
+}
+
+.rank-2 img {
+  height: 360px;
+}
+
+.rank-3 {
+  width: 240px;
+}
+
+.rank-3 img {
+  height: 310px;
+}
+
+.rank-4 {
+  width: 210px;
+}
+
+.rank-4 img {
+  height: 270px;
+}
+
+.rank-5 {
+  width: 180px;
+}
+
+.rank-5 img {
+  height: 230px;
+}
+
+@media (max-width: 768px) {
+  .ranking-list {
+    align-items: stretch;
+  }
+
+  .rank-1,
+  .rank-2,
+  .rank-3,
+  .rank-4,
+  .rank-5 {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .rank-1 img,
+  .rank-2 img,
+  .rank-3 img,
+  .rank-4 img,
+  .rank-5 img {
+    height: 260px;
+  }
+}

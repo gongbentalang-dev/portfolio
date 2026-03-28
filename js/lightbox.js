@@ -8,35 +8,72 @@ const cameraEl = document.getElementById("camera");
 const settingsEl = document.getElementById("settings");
 
 let current = 0;
+let startTime = null;
+
+const STORAGE_KEY = "imageViewTimes";
+
+// localStorageから取得
+function getViewTimes() {
+  return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+}
+
+// localStorageへ保存
+function saveViewTimes(data) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+}
+
+// 現在の画像の閲覧時間を記録
+function recordTime(index) {
+  if (startTime === null) return;
+
+  const duration = Date.now() - startTime;
+  const viewTimes = getViewTimes();
+
+  if (!viewTimes[index]) {
+    viewTimes[index] = 0;
+  }
+
+  viewTimes[index] += duration;
+  saveViewTimes(viewTimes);
+
+  startTime = null;
+}
 
 // ライトボックスを開く
 function openLightbox(index) {
   current = index;
   lightbox.classList.add("active");
   updateLightbox();
+  startTime = Date.now();
 }
 
 // ライトボックスを閉じる
 function closeLightbox() {
+  recordTime(current);
   lightbox.classList.remove("active");
 }
 
 // 次の画像へ
 function showNext() {
+  recordTime(current);
   current = (current + 1) % images.length;
   updateLightbox();
+  startTime = Date.now();
 }
 
 // 前の画像へ
 function showPrev() {
+  recordTime(current);
   current = (current - 1 + images.length) % images.length;
   updateLightbox();
+  startTime = Date.now();
 }
 
 // 表示内容を更新
 function updateLightbox() {
   const img = images[current];
   lightboxImg.src = img.src;
+  lightboxImg.alt = img.alt || "";
 
   const manualCamera = img.getAttribute("data-camera");
   const manualSettings = img.getAttribute("data-settings");
