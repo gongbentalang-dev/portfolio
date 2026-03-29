@@ -25,7 +25,7 @@ const imageSources = [
 
 // ミリ秒 → 秒
 function formatTime(ms) {
-  return (ms / 1000).toFixed(1) + " sec";
+  return "Viewed " + (ms / 1000).toFixed(1) + " s";
 }
 
 function loadRanking() {
@@ -40,7 +40,7 @@ function loadRanking() {
     return;
   }
 
-  rankingList.innerHTML = "";
+ rankingList.innerHTML = "";
 
   ranking.forEach(([index, time], i) => {
     const card = document.createElement("div");
@@ -49,7 +49,9 @@ function loadRanking() {
     card.innerHTML = `
       <div class="rank-label">#${i + 1}</div>
       <img src="${imageSources[index]}" alt="Ranked Image ${i + 1}">
-      <div class="time-label">${formatTime(time)}</div>
+      <div class="ranking-info">
+        <div class="time-label">${formatTime(time)}</div>
+      </div>
     `;
 
     rankingList.appendChild(card);
