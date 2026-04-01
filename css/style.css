@@ -10,7 +10,9 @@ body {
 html {
   overflow-y: scroll;
 }
-
+main {
+  padding-top: 110px;
+}
 /* ===== ヘッダー / ナビ ===== */
 
 header {
@@ -19,7 +21,7 @@ header {
   left: 0;
   right: 0;
   z-index: 10;
-  height: 70px;
+  height: 72px;
   display: flex;
   align-items: center;
   padding: 20px 30px;
@@ -106,9 +108,8 @@ nav a.active {
 
 .about {
   max-width: 800px;
-  margin: 100px auto;
+  margin: 0 auto;
   padding: 0 20px;
-
   color: white;
   line-height: 1.8;
 }
@@ -128,7 +129,7 @@ nav a.active {
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
   min-height: 100vh;
-  padding: 80px 30px;
+  padding:110px 30px 30px;
   background: black;
 }
 
@@ -314,12 +315,12 @@ nav a.active {
 
 @media (max-width: 768px) {
   body {
-    padding-top: 110px;
+    padding-top: 0;
   }
 
   nav {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 上3つ */
+    grid-template-columns: repeat(3, 1fr);
     gap: 8px 10px;
     justify-items: center;
   }
@@ -332,13 +333,6 @@ nav a.active {
     width: 100%;
   }
 
-  /* 下2つを2列にする */
-  nav a:nth-child(4),
-  nav a:nth-child(5) {
-    grid-column: span 1;
-  }
-
-  /* 4,5を中央寄せ */
   nav a:nth-child(4) {
     grid-column: 1 / 2;
   }

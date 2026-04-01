@@ -91,7 +91,7 @@ body {
 /* スマホ対応 */
 @media (max-width: 768px) {
   .ranking-page {
-    padding: 100px 16px 60px;
+    padding: 110px 16px 60px;
   }
 
   .ranking-header {
