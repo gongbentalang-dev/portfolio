@@ -88,10 +88,6 @@ body {
   font-size: 2.3rem;
 }
 
-.ranking-card.rank-1 .time-label {
-  font-size: 1.6rem;
-}
-
 /* スマホ対応 */
 @media (max-width: 768px) {
   .ranking-page {
