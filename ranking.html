@@ -20,11 +20,16 @@
 
   <main class="ranking-page">
     <section class="ranking-header">
-      <h1>Your Top 5 Viewed Photos</h1>
-      <p>この端末での閲覧時間をもとに表示しています</p>
+      <h1>Top 5 Viewed Photos</h1>
+      <p>
+        このページでは、この端末・このブラウザ内での拡大表示時間をもとに、
+        閲覧時間の長かった写真を上位5件表示しています。
+      </p>
     </section>
 
-    <section id="ranking-list" class="ranking-list"></section>
+    <section id="ranking-list" class="ranking-list" aria-live="polite">
+      <p class="ranking-message">ランキングを読み込み中です...</p>
+    </section>
   </main>
 
   <script src="js/ranking.js"></script>

@@ -1,5 +1,7 @@
 let works = [];
 let currentIndex = 0;
+let openedAt = 0;
+let currentWorkId = null;
 
 const lightbox = document.getElementById("lightbox");
 const lightboxImg = document.getElementById("lightbox-img");
@@ -24,6 +26,17 @@ function formatDate(dateString) {
   return `${y}.${m}.${d}`;
 }
 
+function saveViewTime() {
+  if (!currentWorkId || !openedAt) return;
+
+  const seconds = (Date.now() - openedAt) / 1000;
+  const data = JSON.parse(localStorage.getItem("viewTimes") || "{}");
+
+  data[currentWorkId] = (data[currentWorkId] || 0) + seconds;
+
+  localStorage.setItem("viewTimes", JSON.stringify(data));
+}
+
 function updateLightbox(index) {
   const work = works[index];
   if (!work) return;
@@ -44,21 +57,41 @@ function updateLightbox(index) {
 
 function openLightbox(index) {
   updateLightbox(index);
+
+  const work = works[index];
+  currentWorkId = work.id;
+  openedAt = Date.now();
+
   lightbox.classList.add("active");
 }
 
 function closeLightbox() {
   lightbox.classList.remove("active");
+
+  saveViewTime();
+
+  currentWorkId = null;
+  openedAt = 0;
 }
 
 function showPrev() {
+  saveViewTime();
+
   const prevIndex = currentIndex === 0 ? works.length - 1 : currentIndex - 1;
   updateLightbox(prevIndex);
+
+  currentWorkId = works[prevIndex].id;
+  openedAt = Date.now();
 }
 
 function showNext() {
+  saveViewTime();
+
   const nextIndex = currentIndex === works.length - 1 ? 0 : currentIndex + 1;
   updateLightbox(nextIndex);
+
+  currentWorkId = works[nextIndex].id;
+  openedAt = Date.now();
 }
 
 async function fetchWorks() {
@@ -124,7 +157,6 @@ if (nextBtn) {
 
 if (lightbox) {
   lightbox.addEventListener("click", (e) => {
-    // 画像本体・矢印・閉じるボタン以外なら閉じる
     if (
       e.target === lightbox ||
       (!e.target.closest("#lightbox-img") &&

@@ -1,61 +1,89 @@
-const STORAGE_KEY = "imageViewTimes";
+const STORAGE_KEY = "viewTimes";
 const rankingList = document.getElementById("ranking-list");
+const API_URL = "https://vks2e95ehh.microcms.io/api/v1/portfolio?limit=100";
 
-// ギャラリー画像一覧
-const imageSources = [
-  "images/photo1.jpg",
-  "images/photo2.jpg",
-  "images/photo3.jpg",
-  "images/photo4.jpg",
-  "images/photo5.jpg",
-  "images/photo6.jpg",
-  "images/photo7.jpg",
-  "images/photo8.jpg",
-  "images/photo9.jpg",
-  "images/photo10.jpg",
-  "images/photo11.jpg",
-  "images/photo12.jpg",
-  "images/photo13.jpg",
-  "images/photo14.jpg",
-  "images/photo15.jpg",
-  "images/photo16.jpg",
-  "images/photo17.jpg",
-  "images/photo18.jpg",
-];
-
-// ミリ秒 → 秒
-function formatTime(ms) {
-  return "Viewed " + (ms / 1000).toFixed(1) + " s";
+if (!rankingList) {
+  console.error("#ranking-list が見つかりません");
 }
 
-function loadRanking() {
-  const viewTimes = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+async function fetchWorks() {
+  const response = await fetch(API_URL, {
+    headers: {
+      "X-MICROCMS-API-KEY": "00noGUhIiZTR7chPxpAvKqzcwsYaPhPpMMGA"
+    }
+  });
 
-  const ranking = Object.entries(viewTimes)
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 5);
-
-  if (ranking.length === 0) {
-    rankingList.innerHTML = "<p>まだ閲覧データがありません。</p>";
-    return;
+  if (!response.ok) {
+    throw new Error(`HTTP Error: ${response.status} ${response.statusText}`);
   }
 
- rankingList.innerHTML = "";
+  const data = await response.json();
+  return data.contents || [];
+}
 
-  ranking.forEach(([index, time], i) => {
-    const card = document.createElement("div");
-    card.classList.add("ranking-card", `rank-${i + 1}`);
+function getViewTimes() {
+  return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+}
 
-    card.innerHTML = `
-      <div class="rank-label">#${i + 1}</div>
-      <img src="${imageSources[index]}" alt="Ranked Image ${i + 1}">
-      <div class="ranking-info">
-        <div class="time-label">${formatTime(time)}</div>
-      </div>
-    `;
+function formatTime(seconds) {
+  return `Viewed ${seconds.toFixed(1)} s`;
+}
 
-    rankingList.appendChild(card);
-  });
+function createRankingCard(work, rank) {
+  const card = document.createElement("div");
+  card.classList.add("ranking-card", `rank-${rank}`);
+
+  const imageUrl = work.image?.url || "";
+  const category = work.category || "";
+  const altText = category || `Ranked Image ${rank}`;
+
+  card.innerHTML = `
+    <div class="rank-label">#${rank}</div>
+    <img src="${imageUrl}" alt="${altText}">
+    <div class="ranking-info">
+      <div class="time-label">${formatTime(work.viewTime)}</div>
+      <div class="category-label">${category}</div>
+    </div>
+  `;
+
+  return card;
+}
+
+function renderMessage(message) {
+  rankingList.innerHTML = `<p class="ranking-message">${message}</p>`;
+}
+
+async function loadRanking() {
+  if (!rankingList) return;
+
+  try {
+    const works = await fetchWorks();
+    const viewTimes = getViewTimes();
+
+    const rankedWorks = works
+      .map((work) => ({
+        ...work,
+        viewTime: viewTimes[work.id] || 0
+      }))
+      .filter((work) => work.viewTime > 0)
+      .sort((a, b) => b.viewTime - a.viewTime)
+      .slice(0, 5);
+
+    if (rankedWorks.length === 0) {
+      renderMessage("まだ閲覧データがありません。");
+      return;
+    }
+
+    rankingList.innerHTML = "";
+
+    rankedWorks.forEach((work, index) => {
+      const card = createRankingCard(work, index + 1);
+      rankingList.appendChild(card);
+    });
+  } catch (error) {
+    console.error("Ranking load error:", error);
+    renderMessage("ランキングの読み込みに失敗しました。");
+  }
 }
 
 loadRanking();

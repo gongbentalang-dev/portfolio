@@ -6,14 +6,14 @@ body {
 }
 
 .ranking-page {
-  padding: 120px 20px 80px;
   max-width: 1100px;
   margin: 0 auto;
+  padding: 120px 20px 80px;
 }
 
 .ranking-header {
-  text-align: center;
   margin-bottom: 60px;
+  text-align: center;
 }
 
 .ranking-header h1 {
@@ -49,46 +49,52 @@ body {
 }
 
 .rank-label {
+  color: #fff;
   font-size: 2rem;
   font-weight: 700;
-  color: #fff;
-  text-align: center;
   letter-spacing: 0.04em;
+  text-align: center;
+}
+
+.ranking-card.rank-1 .rank-label {
+  font-size: 2.3rem;
 }
 
 .ranking-card img {
+  display: block;
   width: 240px;
   height: 300px;
   object-fit: cover;
-  display: block;
 }
 
 .ranking-info {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  min-width: 0;
 }
 
 .time-label {
   margin-top: 10px;
+  color: #ddd;
   font-size: 1rem;
   font-weight: 500;
-  color: #ddd;
   letter-spacing: 0.03em;
 }
 
-.sub-label {
-  font-size: 0.95rem;
+.sub-label,
+.category-label,
+.ranking-message {
   color: #9a9a9a;
+  font-size: 0.95rem;
   line-height: 1.7;
 }
 
-/* 1位だけ少し強調 */
-.ranking-card.rank-1 .rank-label {
-  font-size: 2.3rem;
+.ranking-message {
+  text-align: center;
+  padding: 40px 0;
 }
 
-/* スマホ対応 */
 @media (max-width: 768px) {
   .ranking-page {
     padding: 110px 16px 60px;
@@ -105,8 +111,8 @@ body {
   .ranking-card {
     grid-template-columns: 1fr;
     gap: 16px;
-    text-align: center;
     padding: 22px 0;
+    text-align: center;
   }
 
   .rank-label {
@@ -128,7 +134,9 @@ body {
     font-size: 1.2rem;
   }
 
-  .sub-label {
+  .sub-label,
+  .category-label,
+  .ranking-message {
     font-size: 0.9rem;
   }
 }
