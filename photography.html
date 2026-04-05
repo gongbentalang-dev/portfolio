@@ -22,45 +22,38 @@
 </header>
 
 <section class="gallery">
-<img src="images/photo1.jpg" class="gallery-img">
-<img src="images/photo2.jpg" loading="lazy" class="gallery-img">
-<img src="images/photo3.jpg" loading="lazy" class="gallery-img" data-camera=
-"Panasonic DC-S5M2X" data-settings="f/8  1/800s  ISO320">
-<img src="images/photo4.jpg" loading="lazy" class="gallery-img">
-<img src="images/photo5.jpg" loading="lazy" class="gallery-img">
-<img src="images/photo6.jpg" loading="lazy" class="gallery-img">
-<img src="images/photo7.jpg" loading="lazy" class="gallery-img">
-<img src="images/photo8.jpg" loading="lazy" class="gallery-img">
-<img src="images/photo9.jpg" loading="lazy" class="gallery-img">
-<img src="images/photo10.jpg" loading="lazy" class="gallery-img">
-<img src="images/photo11.jpg" loading="lazy" class="gallery-img">
-<img src="images/photo12.jpg" loading="lazy" class="gallery-img">
-<img src="images/photo13.jpg" loading="lazy" class="gallery-img">
-<img src="images/photo14.jpg" loading="lazy" class="gallery-img">
-<img src="images/photo15.jpg" loading="lazy" class="gallery-img">
-<img src="images/photo16.jpg" loading="lazy" class="gallery-img">
-<img src="images/photo17.jpg" loading="lazy" class="gallery-img">
-<img src="images/photo18.jpg" loading="lazy" class="gallery-img">
+
 </section>
 
 <!-- Lightbox -->
 <div id="lightbox">
-  <button id="close" type="button" aria-label="閉じる">×</button>
 
-  <img id="lightbox-img" alt="拡大表示された画像">
+  <button id="close">×</button>
 
-  <button class="arrow left" type="button" aria-label="前の画像">‹</button>
-  <button class="arrow right" type="button" aria-label="次の画像">›</button>
+  <button class="arrow left">‹</button>
 
-  <div class="photo-info">
-    <p id="camera"></p>
-    <p id="settings"></p>
+  <!-- 画像だけ中央 -->
+  <img id="lightbox-img" src="" alt="拡大画像">
+
+  <!-- EXIFは別で右固定 -->
+  <div class="lightbox-info">
+    <p>カテゴリ: <span class="category"></span></p>
+    <p>撮影日: <span class="shootingDate"></span></p>
+    <p>カメラ: <span class="camera"></span></p>
+    <p>レンズ: <span class="lens"></span></p>
+    <p>F値: <span class="fNumber"></span></p>
+    <p>SS: <span class="shutterSpeed"></span></p>
+    <p>ISO: <span class="iso"></span></p>
   </div>
+
+  <button class="arrow right">›</button>
+
 </div>
 
-<!-- EXIF -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.min.js"></script>
-<script src="js/lightbox.js"></script>
 
+</div>
+
+<script src="js/cms-test.js"></script>
+<script src="js/lightbox.js"></script>
 </body>
 </html>

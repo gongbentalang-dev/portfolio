@@ -121,12 +121,26 @@ images.forEach((img, index) => {
 });
 
 // 閉じるボタン
-closeBtn.addEventListener("click", closeLightbox);
+if (closeBtn) {
+  closeBtn.addEventListener("click", () => {
+    lightbox.classList.remove("active");
+  });
+}
 
 // 背景クリックで閉じる
-lightbox.addEventListener("click", (e) => {
-  if (e.target === lightbox) {
-    closeLightbox();
+if (lightbox) {
+  lightbox.addEventListener("click", (e) => {
+    // 背景そのものを押した時だけ閉じる
+    if (e.target === lightbox) {
+      lightbox.classList.remove("active");
+    }
+  });
+}
+
+// ESCキーで閉じる
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    lightbox.classList.remove("active");
   }
 });
 
