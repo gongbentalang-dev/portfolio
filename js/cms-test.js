@@ -175,5 +175,27 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "ArrowLeft") showPrev();
   if (e.key === "ArrowRight") showNext();
 });
+let touchStartX = 0;
+let touchEndX = 0;
 
+if (lightboxImg) {
+  lightboxImg.addEventListener("touchstart", (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+
+  lightboxImg.addEventListener("touchend", (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+
+    const diff = touchEndX - touchStartX;
+
+    // 50px以上動いたらスワイプ判定
+    if (Math.abs(diff) < 50) return;
+
+    if (diff > 0) {
+      showPrev();
+    } else {
+      showNext();
+    }
+  });
+}
 fetchWorks();

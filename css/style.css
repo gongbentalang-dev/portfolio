@@ -1,18 +1,20 @@
 /* ===== 共通 ===== */
 
-body {
-  margin: 0;
-  font-family: sans-serif;
-  background: black;
-  color: white;
-}
-
 html {
   overflow-y: scroll;
 }
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: #000;
+  color: #fff;
+}
+
 main {
   padding-top: 110px;
 }
+
 /* ===== ヘッダー / ナビ ===== */
 
 header {
@@ -22,10 +24,9 @@ header {
   right: 0;
   z-index: 10;
 
-  height: 72px;
   display: flex;
   align-items: center;
-
+  height: 72px;
   padding: 20px 40px;
 
   background: rgba(0, 0, 0, 0.3);
@@ -33,8 +34,8 @@ header {
 }
 
 nav {
-  margin-left: auto;
   display: flex;
+  margin-left: auto;
 }
 
 nav a {
@@ -43,12 +44,10 @@ nav a {
 
   color: #fff;
   text-decoration: none;
-
-  font-size: 14px;
   font-family: Arial, sans-serif;
+  font-size: 14px;
   font-weight: 400;
   line-height: 1.4;
-
   white-space: nowrap;
 
   transition: opacity 0.3s;
@@ -76,7 +75,6 @@ nav a.active {
   width: 100%;
   height: 100%;
   object-fit: cover;
-
   opacity: 0;
   transition: opacity 3s;
 }
@@ -91,9 +89,9 @@ nav a.active {
   position: absolute;
   top: 50%;
   left: 50%;
-
   transform: translate(-50%, -50%);
-  color: white;
+
+  color: #fff;
   text-align: center;
 }
 
@@ -113,7 +111,7 @@ nav a.active {
   max-width: 800px;
   margin: 0 auto;
   padding: 0 20px;
-  color: white;
+  color: #fff;
   line-height: 1.8;
 }
 
@@ -127,13 +125,14 @@ nav a.active {
 }
 
 /* ===== Photographyページ ===== */
+
 .gallery {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
   min-height: 100vh;
-  padding:110px 30px 30px;
-  background: black;
+  padding: 110px 30px 30px;
+  background: #000;
 }
 
 .gallery img {
@@ -160,11 +159,9 @@ nav a.active {
   position: fixed;
   inset: 0;
   z-index: 9999;
-
   display: none;
   justify-content: center;
   align-items: center;
-
   background: rgba(0, 0, 0, 0.9);
 }
 
@@ -172,50 +169,77 @@ nav a.active {
   display: flex;
 }
 
-/* 画像：完全中央 */
 #lightbox-img {
-  max-width: 70vw;
-  max-height: 85vh;
+  display: block;
   width: auto;
   height: auto;
+  max-width: 82vw;
+  max-height: 72vh;
   object-fit: contain;
 }
 
-/* EXIF：右固定 */
+/* EXIF情報：PCでは下中央に固定 */
 .lightbox-info {
   position: absolute;
-  right: 60px;
-  top: 50%;
-  transform: translateY(-50%);
+  left: 50%;
+  bottom: 28px;
+  transform: translateX(-50%);
 
-  width: 260px;
+  width: min(980px, 88vw);
 
   color: #fff;
-  line-height: 2;
-  font-size: 16px;
+  font-size: 17px;
+  line-height: 1.8;
+  text-align: left;
 }
 
-/* ボタン */
+.lightbox-info p {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+/* 1段目：カメラ / レンズ */
+.lightbox-row-top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  margin-bottom: 6px;
+}
+
+/* 2段目：F値 / SS / ISO */
+.lightbox-meta-row {
+  display: grid;
+  grid-template-columns: repeat(3, max-content);
+  gap: 28px;
+  margin-bottom: 6px;
+}
+
+/* 3段目：撮影日 / カテゴリ */
+.lightbox-row-bottom {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  gap: 28px;
+}
+
+/* 閉じるボタン */
 #close {
   position: absolute;
   top: 20px;
   right: 30px;
   z-index: 10000;
 
-  background: none;
-  background-color: transparent;
+  width: auto;
+  height: auto;
+  padding: 0;
   border: none;
-  box-shadow: none;
-  outline: none;
-
+  background: none;
   color: #fff;
   font-size: 40px;
   line-height: 1;
-  padding: 0;
-  width: auto;
-  height: auto;
-
   cursor: pointer;
+
+  box-shadow: none;
+  outline: none;
   appearance: none;
   -webkit-appearance: none;
 }
@@ -224,32 +248,30 @@ nav a.active {
 #close:focus,
 #close:active {
   background: none;
-  background-color: transparent;
   border: none;
   box-shadow: none;
   outline: none;
 }
 
+/* 矢印 */
 .arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   z-index: 10000;
 
-  background: none;
-  background-color: transparent;
+  width: auto;
+  height: auto;
+  padding: 0;
   border: none;
-  box-shadow: none;
-  outline: none;
-
+  background: none;
   color: #fff;
   font-size: 48px;
   line-height: 1;
-  padding: 0;
-  width: auto;
-  height: auto;
-
   cursor: pointer;
+
+  box-shadow: none;
+  outline: none;
   appearance: none;
   -webkit-appearance: none;
 }
@@ -258,7 +280,6 @@ nav a.active {
 .arrow:focus,
 .arrow:active {
   background: none;
-  background-color: transparent;
   border: none;
   box-shadow: none;
   outline: none;
@@ -270,43 +291,6 @@ nav a.active {
 
 .right {
   right: 20px;
-}
-
-/* lightbox閉じてる時は矢印も見せない */
-#lightbox {
-  display: none;
-}
-
-#lightbox.active {
-  display: flex;
-}
-/* ===== EXIF表示 ===== */
-
-.photo-info {
-  position: absolute;
-  right: 40px;
-  bottom: 40px;
-  z-index: 1000;
-
-  padding: 12px 18px;
-  border-radius: 8px;
-
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  font-size: 13px;
-  line-height: 1.6;
-  letter-spacing: 0.05em;
-}
-
-#camera {
-  margin-bottom: 4px;
-  font-size: 15px;
-  font-weight: bold;
-}
-
-#settings {
-  opacity: 0.9;
-  font-family: "Courier New", Courier, monospace;
 }
 
 /* ===== Contactページ ===== */
@@ -326,7 +310,7 @@ nav a.active {
 
 .contact-desc {
   margin-bottom: 40px;
-  color: #ffffff;
+  color: #fff;
   font-size: 0.9rem;
 }
 
@@ -341,8 +325,7 @@ nav a.active {
 .form-group label {
   display: block;
   margin-bottom: 8px;
-
-  color: #ffffff;
+  color: #fff;
   font-size: 0.8rem;
   text-transform: uppercase;
 }
@@ -367,9 +350,9 @@ nav a.active {
   border: none;
   background: #000;
   color: #fff;
+  letter-spacing: 0.2em;
   cursor: pointer;
 
-  letter-spacing: 0.2em;
   transition: opacity 0.3s;
 }
 
@@ -387,17 +370,17 @@ nav a.active {
   nav {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
+    align-items: center;
     width: 100%;
     gap: 8px 10px;
-    align-items: center;
   }
 
   nav a {
+    width: 100%;
     margin-left: 0;
     padding: 10px 6px;
     font-size: 13px;
     text-align: center;
-    width: 100%;
   }
 
   nav a:nth-child(1) {
@@ -418,5 +401,62 @@ nav a.active {
 
   nav a:nth-child(5) {
     grid-column: 4 / 6;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    padding: 100px 8px 8px;
+  }
+
+  .gallery img {
+    height: 140px;
+  }
+
+  #lightbox {
+    padding: 20px 16px;
+    align-items: flex-start;
+  }
+
+  #lightbox-img {
+    max-width: 88vw;
+    max-height: 52vh;
+    margin-top: 70px;
+  }
+
+  /* スマホでは画像とかぶらないように下へ流す */
+  .lightbox-info {
+    position: static;
+    transform: none;
+    width: 88vw;
+    margin: 18px auto 0;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .lightbox-row-top,
+  .lightbox-row-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .lightbox-meta-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  #close {
+    top: 14px;
+    right: 16px;
+    font-size: 34px;
+  }
+
+  /* スマホではアロー非表示 */
+  .arrow {
+    display: none;
   }
 }

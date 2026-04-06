@@ -6,7 +6,7 @@ body {
 }
 
 .ranking-page {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 120px 20px 80px;
 }
@@ -37,9 +37,10 @@ body {
 
 .ranking-card {
   display: grid;
-  grid-template-columns: 80px 260px 1fr;
+  grid-template-columns: 100px 260px 260px;
+  justify-content: center;
   align-items: center;
-  gap: 32px;
+  gap: 40px;
   padding: 20px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -62,14 +63,15 @@ body {
 
 .ranking-card img {
   display: block;
-  width: 240px;
-  height: 300px;
+  width: 280px;
+  height: 360px;
   object-fit: cover;
 }
 
 .ranking-info {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 10px;
   min-width: 0;
 }
@@ -91,8 +93,8 @@ body {
 }
 
 .ranking-message {
-  text-align: center;
   padding: 40px 0;
+  text-align: center;
 }
 
 @media (max-width: 768px) {
