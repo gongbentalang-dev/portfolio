@@ -52,4 +52,4 @@ https://gongbentalang-dev.github.io/portfolio/
 ---
 
 ## GitHub
-https://github.com/gongbentalang-dev/photography-portfolio
+https://github.com/gongbentalang-dev/portfolio
