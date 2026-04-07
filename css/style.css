@@ -163,7 +163,7 @@ nav a.active {
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  padding: 32px 32px 188px;
+  padding: 32px 32px 176px;
   background: rgba(0, 0, 0, 0.9);
 }
 
@@ -176,7 +176,7 @@ nav a.active {
   width: auto;
   height: auto;
   max-width: 82vw;
-  max-height: calc(100dvh - 248px);
+  max-height: calc(100dvh - 232px);
   object-fit: contain;
 }
 
@@ -448,7 +448,7 @@ nav a.active {
 
   /* ===== Lightbox ===== */
   #lightbox {
-    padding: 72px 16px 190px;
+    padding: 72px 16px 176px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -457,7 +457,7 @@ nav a.active {
 
   #lightbox-img {
     max-width: 88vw;
-    max-height: calc(100dvh - 250px);
+    max-height: calc(100dvh - 236px);
     margin-top: 0;
   }
 
