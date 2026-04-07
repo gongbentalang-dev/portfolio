@@ -47,9 +47,9 @@
 ---
 
 ## デモ
-https://〇〇〇（ポートフォリオサイトURL）
+https://gongbentalang-dev.github.io/portfolio/
 
 ---
 
 ## GitHub
-https://github.com/〇〇〇
+https://github.com/gongbentalang-dev/photography-portfolio
