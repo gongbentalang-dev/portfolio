@@ -21,44 +21,56 @@
 </nav>
 </header>
 
-<section class="gallery">
+<section class="gallery" aria-label="写真一覧">
 
 </section>
 
 <!-- Lightbox -->
-<div id="lightbox">
+<div
+  id="lightbox"
+  role="dialog"
+  aria-modal="true"
+  aria-hidden="true"
+  aria-labelledby="lightbox-image-label"
+>
 
-  <button id="close">×</button>
+  <button id="close" type="button" aria-label="閉じる">
+    <span aria-hidden="true">&times;</span>
+  </button>
 
-  <button class="arrow left">‹</button>
+  <button class="arrow left" type="button" aria-label="前の画像">
+    <span aria-hidden="true">&#8249;</span>
+  </button>
 
-  <!-- 画像だけ中央 -->
-  <img id="lightbox-img" src="" alt="拡大画像">
+  <img id="lightbox-img" src="" alt="" aria-describedby="lightbox-image-label">
+  <span id="lightbox-image-label" hidden>拡大表示中の写真</span>
 
-  <!-- EXIFは別で右固定 -->
-  <div class="lightbox-info">
-  <div class="lightbox-row-top">
-    <p>カメラ: <span class="camera"></span></p>
-    <p>レンズ: <span class="lens"></span></p>
+  <div class="lightbox-info" aria-label="写真情報">
+    <div class="lightbox-row-top">
+      <p>カメラ: <span class="camera"></span></p>
+      <p>レンズ: <span class="lens"></span></p>
+    </div>
+
+    <div class="lightbox-meta-row">
+      <p>F値: <span class="fNumber"></span></p>
+      <p>SS: <span class="shutterSpeed"></span></p>
+      <p>ISO: <span class="iso"></span></p>
+    </div>
+
+    <div class="lightbox-row-bottom">
+      <p>撮影日: <span class="shootingDate"></span></p>
+      <p>カテゴリ: <span class="category"></span></p>
+    </div>
   </div>
 
-  <div class="lightbox-meta-row">
-    <p>F値: <span class="fNumber"></span></p>
-    <p>SS: <span class="shutterSpeed"></span></p>
-    <p>ISO: <span class="iso"></span></p>
-  </div>
+  <button class="arrow right" type="button" aria-label="次の画像">
+    <span aria-hidden="true">&#8250;</span>
+  </button>
 
-  <div class="lightbox-row-bottom">
-    <p>撮影日: <span class="shootingDate"></span></p>
-    <p>カテゴリ: <span class="category"></span></p>
-  </div>
 </div>
 
-  <button class="arrow right">›</button>
-
-</div>
-
-
+<script src="js/cms-api.js"></script>
+<script src="js/storage.js"></script>
 <script src="js/cms-test.js"></script>
 
 </body>

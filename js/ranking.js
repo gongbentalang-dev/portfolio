@@ -1,29 +1,4 @@
-const STORAGE_KEY = "viewTimes";
 const rankingList = document.getElementById("ranking-list");
-const API_URL = "https://vks2e95ehh.microcms.io/api/v1/portfolio?limit=100";
-
-if (!rankingList) {
-  console.error("#ranking-list が見つかりません");
-}
-
-async function fetchWorks() {
-  const response = await fetch(API_URL, {
-    headers: {
-      "X-MICROCMS-API-KEY": "00noGUhIiZTR7chPxpAvKqzcwsYaPhPpMMGA"
-    }
-  });
-
-  if (!response.ok) {
-    throw new Error(`HTTP Error: ${response.status} ${response.statusText}`);
-  }
-
-  const data = await response.json();
-  return data.contents || [];
-}
-
-function getViewTimes() {
-  return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
-}
 
 function formatTime(seconds) {
   if (seconds >= 3600) {
@@ -37,45 +12,74 @@ function formatTime(seconds) {
   return `Viewed ${seconds.toFixed(1)} s`;
 }
 
+function renderMessage(message) {
+  if (!rankingList) return;
+
+  rankingList.innerHTML = "";
+
+  const paragraph = document.createElement("p");
+  paragraph.className = "ranking-message";
+  paragraph.textContent = message;
+  rankingList.appendChild(paragraph);
+}
+
 function createRankingCard(work, rank) {
   const card = document.createElement("div");
+  const image = document.createElement("img");
+  const info = document.createElement("div");
+  const timeLabel = document.createElement("div");
+  const categoryLabel = document.createElement("div");
+  const rankLabel = document.createElement("div");
+
   card.classList.add("ranking-card", `rank-${rank}`);
+  info.className = "ranking-info";
+  timeLabel.className = "time-label";
+  categoryLabel.className = "category-label";
+  rankLabel.className = "rank-label";
 
-  const imageUrl = work.image?.url || "";
-  const category = work.category || "";
-  const altText = category || `Ranked Image ${rank}`;
+  rankLabel.textContent = `#${rank}`;
+  image.src = window.PortfolioCMS?.optimizeImageUrl(work.imageUrl, "gallery") || work.imageUrl || "";
+  image.alt = work.category || `Ranked Image ${rank}`;
+  image.loading = "lazy";
+  image.decoding = "async";
+  timeLabel.textContent = formatTime(work.viewTime);
+  categoryLabel.textContent = work.category || "未分類";
 
-  card.innerHTML = `
-    <div class="rank-label">#${rank}</div>
-    <img src="${imageUrl}" alt="${altText}">
-    <div class="ranking-info">
-      <div class="time-label">${formatTime(work.viewTime)}</div>
-      <div class="category-label">${category}</div>
-    </div>
-  `;
+  info.append(timeLabel, categoryLabel);
+  card.append(rankLabel, image, info);
 
   return card;
 }
 
-function renderMessage(message) {
-  rankingList.innerHTML = `<p class="ranking-message">${message}</p>`;
+async function fetchWorks() {
+  if (!window.PortfolioCMS?.fetchPortfolioWorks) {
+    throw new Error("PortfolioCMS helper is not available.");
+  }
+
+  return window.PortfolioCMS.fetchPortfolioWorks();
+}
+
+function getRankedWorks(works, viewTimes) {
+  return works
+    .map((work) => ({
+      ...work,
+      viewTime: viewTimes[work.id] || 0
+    }))
+    .filter((work) => work.viewTime > 0)
+    .sort((a, b) => b.viewTime - a.viewTime)
+    .slice(0, 5);
 }
 
 async function loadRanking() {
-  if (!rankingList) return;
+  if (!rankingList) {
+    console.error('[Ranking] "#ranking-list" element was not found.');
+    return;
+  }
 
   try {
     const works = await fetchWorks();
-    const viewTimes = getViewTimes();
-
-    const rankedWorks = works
-      .map((work) => ({
-        ...work,
-        viewTime: viewTimes[work.id] || 0
-      }))
-      .filter((work) => work.viewTime > 0)
-      .sort((a, b) => b.viewTime - a.viewTime)
-      .slice(0, 5);
+    const viewTimes = window.PortfolioStorage?.getViewTimes?.() || {};
+    const rankedWorks = getRankedWorks(works, viewTimes);
 
     if (rankedWorks.length === 0) {
       renderMessage("まだ閲覧データがありません。");
@@ -85,11 +89,10 @@ async function loadRanking() {
     rankingList.innerHTML = "";
 
     rankedWorks.forEach((work, index) => {
-      const card = createRankingCard(work, index + 1);
-      rankingList.appendChild(card);
+      rankingList.appendChild(createRankingCard(work, index + 1));
     });
   } catch (error) {
-    console.error("Ranking load error:", error);
+    console.error("[Ranking] Failed to load ranking data:", error);
     renderMessage("ランキングの読み込みに失敗しました。");
   }
 }
