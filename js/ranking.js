@@ -26,6 +26,14 @@ function getViewTimes() {
 }
 
 function formatTime(seconds) {
+  if (seconds >= 3600) {
+    return `Viewed ${(seconds / 3600).toFixed(1)} h`;
+  }
+
+  if (seconds >= 60) {
+    return `Viewed ${(seconds / 60).toFixed(1)} min`;
+  }
+
   return `Viewed ${seconds.toFixed(1)} s`;
 }
 
